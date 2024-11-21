@@ -1,0 +1,6 @@
+<h1>Edit List</h1>
+<%= simple_form_for (@list) do |f| %>
+  <%= f.input :name, required: true %>
+
+  <%= f.submit "Ok", class: "btn btn-primary" %>
+<% end %>
