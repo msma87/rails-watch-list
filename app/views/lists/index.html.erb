@@ -1,8 +1,51 @@
-<h2>Movies Lists</h1>
-<ul>
-  <% @lists.each do |list| %>
-  <li><%= link_to list.name, list_path(list) %></li>
-  <% end %>
-</ul>
+<div class="container py-5" style="background-color: #f8f9fa;">
+  <div class="text-center mb-5">
+    <h1 class="display-3 fw-bold text-primary">Your Movie Lists</h1>
+    <p class="lead text-muted">Effortlessly organize and explore your favorite movies.</p>
+  </div>
 
-<%= link_to 'Create a movie list', new_list_path, class: 'btn btn-outline-secondary' %>
+  <!-- Featured Image -->
+  <div class="mb-5 text-center">
+    <%= image_tag "imagem_home.jpg",
+          alt: "Person holding a remote control near a bucket of popcorn",
+          class: "img-fluid rounded shadow-lg homepage-image",
+          style: "max-width: 80%; border: 4px solid #b0bec5;" %>
+  </div>
+
+  <!-- Movie Lists -->
+  <div class="row g-4">
+    <% @lists.each do |list| %>
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow border-0 rounded-4 h-100">
+          <!-- Exibir imagem da lista -->
+          <% if list.image.attached? %>
+            <div class="card-img-top text-center">
+              <%= image_tag list.image,
+                    alt: "#{list.name} Image",
+                    class: "img-fluid rounded-top",
+                    style: "max-height: 200px; object-fit: cover; width: 100%;" %>
+            </div>
+          <% else %>
+            <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center rounded-top"
+                 style="height: 200px; font-size: 1.2rem;">
+              No Image
+            </div>
+          <% end %>
+
+          <div class="card-body">
+            <h5 class="card-title text-primary fw-bold"><%= list.name %></h5>
+            <p class="card-text text-muted">Explore and manage your favorite movies.</p>
+          </div>
+          <div class="card-footer text-center bg-light border-0 rounded-bottom">
+            <%= link_to "View List", list_path(list), class: "btn btn-outline-primary btn-sm mx-1 rounded-pill" %>
+            <%= link_to "Edit List Name", edit_list_path(list), class: "btn btn-outline-secondary btn-sm mx-1 rounded-pill" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-5">
+    <%= link_to 'Create a New List', new_list_path, class: 'btn btn-primary btn-lg px-5 py-3 shadow rounded-pill' %>
+  </div>
+</div>

@@ -1,6 +1,35 @@
-<h1>Edit List</h1>
-<%= simple_form_for (@list) do |f| %>
-  <%= f.input :name, required: true %>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4 text-primary fw-bold">Edit Your List</h2>
+          <%= simple_form_for(@list, html: { multipart: true }) do |f| %>
+            <!-- Campo para o nome -->
+            <div class="mb-3">
+              <%= f.input :name, required: true, label: false, placeholder: "Enter list name", class: "form-control form-control-lg rounded-pill" %>
+            </div>
 
-  <%= f.submit "Ok", class: "btn btn-primary" %>
-<% end %>
+            <!-- Exibir imagem atual -->
+            <% if @list.image.attached? %>
+              <div class="mb-3 text-center">
+                <%= image_tag @list.image, class: "img-fluid rounded shadow-sm", style: "max-width: 100%; height: auto;" %>
+                <p class="text-muted mt-2">Current Image</p>
+              </div>
+            <% end %>
+
+            <!-- Campo para upload de nova imagem -->
+            <div class="mb-3">
+              <%= f.input :image, as: :file, label: "Upload a New Image", class: "form-control form-control-lg" %>
+            </div>
+
+            <!-- Botão para salvar alterações -->
+            <div class="text-center">
+              <%= f.submit "Save Changes", class: "btn btn-primary btn-lg px-5 py-2 shadow rounded-pill" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

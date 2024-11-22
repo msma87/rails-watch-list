@@ -10,3 +10,71 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+/* Gradients for buttons */
+.btn-gradient-primary {
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  color: #fff;
+  border: none;
+}
+
+.btn-gradient-secondary {
+  background: linear-gradient(45deg, #6c757d, #495057);
+  color: #fff;
+  border: none;
+}
+
+.btn-gradient-danger {
+  background: linear-gradient(45deg, #dc3545, #b21f2d);
+  color: #fff;
+  border: none;
+}
+
+.btn-gradient-dark {
+  background: linear-gradient(45deg, #343a40, #23272b);
+  color: #fff;
+  border: none;
+}
+
+.btn-gradient-primary:hover,
+.btn-gradient-secondary:hover,
+.btn-gradient-danger:hover,
+.btn-gradient-dark:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* Card shadow */
+.card {
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Modern text styles */
+.text-uppercase {
+  letter-spacing: 2px;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.comment-section {
+  border-left: 5px solid #007bff;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-section strong {
+  color: #333;
+}
+
+.comment-section em {
+  color: #666;
+}

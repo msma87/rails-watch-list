@@ -1,6 +1,22 @@
-<h1>New List</h1>
-<%= simple_form_for (@list) do |f| %>
-  <%= f.input :name, required: true %>
-
-  <%= f.submit "Create", class: "btn btn-primary" %>
-<% end %>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4 text-primary fw-bold">Create a New List</h2>
+          <%= simple_form_for(@list, html: { multipart: true }) do |f| %>
+            <div class="mb-3">
+              <%= f.input :name, required: true, label: false, placeholder: "List name", class: "form-control form-control-lg rounded-pill" %>
+            </div>
+            <div class="mb-3">
+              <%= f.input :image, as: :file, label: "Upload an Image", class: "form-control form-control-lg rounded-pill" %>
+            </div>
+            <div class="text-center">
+              <%= f.submit "Create List", class: "btn btn-primary btn-lg px-5 py-2 shadow rounded-pill" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

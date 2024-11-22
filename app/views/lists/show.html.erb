@@ -1,23 +1,69 @@
-<h2> <%= @list.name %> </h2>
-<div class="bookmarks-container">
-  <% @list.bookmarks.each do |bookmark| %>
-    <div class="bookmark">
-      <div class="movie">
-        <p><strong>Filme:</strong> <%= bookmark.movie.title %></p>
+<h2 class="text-center my-4 text-uppercase fw-bold text-primary"><%= @list.name %></h2>
+
+<div class="container">
+  <div class="row g-3 justify-content-center">
+    <% if @list.bookmarks.any? %>
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card border-0 shadow-sm h-100 rounded-4" style="max-width: 250px; margin: auto;">
+            <% if bookmark.movie.poster_url.present? %>
+              <div class="d-flex justify-content-center align-items-center bg-light" style="height: 200px;">
+                <img src="<%= bookmark.movie.poster_url %>"
+                     alt="<%= bookmark.movie.title %> Poster"
+                     class="img-fluid rounded"
+                     style="max-height: 100%; max-width: 100%; object-fit: contain;">
+              </div>
+            <% else %>
+              <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center rounded-top"
+                   style="height: 200px; font-size: 1.2rem;">
+                No Poster
+              </div>
+            <% end %>
+            <div class="card-body p-3 d-flex flex-column">
+              <!-- Movie Title -->
+              <h6 class="card-title text-truncate fw-bold text-primary mb-1"><%= bookmark.movie.title %></h6>
+
+              <!-- Movie Rating -->
+              <p class="card-text text-warning mb-1">
+                <small><strong>Rating:</strong> <%= bookmark.movie.rating %>/10</small>
+              </p>
+
+              <!-- Movie Overview -->
+              <p class="card-text text-muted flex-grow-1" style="font-size: 0.8rem;">
+                <%= truncate(bookmark.movie.overview, length: 80) %>
+              </p>
+
+              <!-- Bookmark Comment -->
+              <div class="bg-light p-2 mt-2 rounded shadow-sm" style="border-left: 4px solid #007bff;">
+                <p class="card-text mb-0" style="font-size: 0.8rem;">
+                  <strong>Comment:</strong> <em class="text-secondary"><%= truncate(bookmark.comment, length: 80) %></em>
+                </p>
+              </div>
+
+              <!-- Delete Button -->
+              <div class="mt-2 text-center">
+                <%= link_to "Delete", list_bookmark_path(@list, bookmark),
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' },
+                            class: "btn btn-outline-danger btn-sm w-50 rounded-pill" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-12">
+        <p class="text-center text-muted fs-6">No bookmarks yet. Add your first movie to this list!</p>
       </div>
-      <div class="comment">
-        <p><strong>Comentários:</strong> <%= bookmark.comment %></p>
-      </div>
-      <%= link_to 'Delete', list_bookmark_path(@list, bookmark), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
-<div class="bookmarks-buttons-container">
-  <%= link_to 'Add a movie', new_list_bookmark_path(@list), class: 'btn btn-outline-secondary' %>
-  <%= link_to 'Edit list name', edit_list_path(@list), class: 'btn btn-outline-secondary' %>
-  <%= link_to 'Delete list', list_path(@list),
+<div class="text-center mt-4">
+  <%= link_to 'Add a Movie', new_list_bookmark_path(@list), class: 'btn btn-primary mx-2 px-3 py-2 shadow-sm rounded-pill' %>
+  <%= link_to 'Edit List', edit_list_path(@list), class: 'btn btn-secondary mx-2 px-3 py-2 shadow-sm rounded-pill' %>
+  <%= link_to 'Delete List', list_path(@list),
               data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-              class: 'btn btn-outline-secondary' %>
-  <%= link_to 'Return to Lists', lists_path, class: 'btn btn-outline-secondary' %>
+              class: 'btn btn-outline-danger mx-2 px-3 py-2 shadow-sm rounded-pill' %>
+  <%= link_to 'Back to Lists', lists_path, class: 'btn btn-dark mx-2 px-3 py-2 shadow-sm rounded-pill' %>
 </div>

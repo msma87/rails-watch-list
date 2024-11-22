@@ -1,1 +1,12 @@
-// Specific CSS for your home-page
+.list-group-item:hover {
+  background-color: #fce4ec;
+  cursor: pointer;
+}
+
+a.text-dark:hover {
+  color: #d32f2f;
+  text-decoration: underline;
+}
+.shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2) !important;
+}
