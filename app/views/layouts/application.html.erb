@@ -2,17 +2,21 @@
 <html>
   <head>
     <title>RailsWatchList</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8"> <!-- Define o charset padrão como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Viewport para dispositivos móveis -->
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Inclui os estilos -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <!-- Importa o JavaScript com mapa de importação -->
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <div class='container'>
-      <%= yield %>
+    <!-- Adiciona um contêiner principal para a aplicação -->
+    <div class="container">
+      <%= yield %> <!-- Renderiza o conteúdo das views -->
     </div>
   </body>
 </html>

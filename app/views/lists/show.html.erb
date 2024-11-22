@@ -1,16 +1,23 @@
-<h2> <%= @list.name %></h2>
-<p><strong>Comments</strong></p>
-<ul class="list-group">
+<h2> <%= @list.name %> </h2>
+<div class="bookmarks-container">
   <% @list.bookmarks.each do |bookmark| %>
-    <li class="list-group-item"><%= bookmark.comment %></li>
+    <div class="bookmark">
+      <div class="movie">
+        <p><strong>Filme:</strong> <%= bookmark.movie.title %></p>
+      </div>
+      <div class="comment">
+        <p><strong>Comentários:</strong> <%= bookmark.comment %></p>
+      </div>
+      <%= link_to 'Delete', list_bookmark_path(@list, bookmark), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+    </div>
   <% end %>
-</ul>
+</div>
 
-<%= link_to 'Add comment', new_bookmark_path, class: 'btn btn-outline-secondary' %>
-
-<%= link_to 'Add movie', new_list_path, class: 'btn btn-outline-secondary' %>
-<%= link_to 'Edit list', edit_list_path(@list), class: 'btn btn-outline-secondary' %>
-
-<%= link_to 'Delete list', list_path(@list), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-outline-secondary' %>
-
-<%= link_to 'Return to Lists', lists_path, class: 'btn btn-outline-secondary' %>
+<div class="bookmarks-buttons-container">
+  <%= link_to 'Add a movie', new_list_bookmark_path(@list), class: 'btn btn-outline-secondary' %>
+  <%= link_to 'Edit list name', edit_list_path(@list), class: 'btn btn-outline-secondary' %>
+  <%= link_to 'Delete list', list_path(@list),
+              data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+              class: 'btn btn-outline-secondary' %>
+  <%= link_to 'Return to Lists', lists_path, class: 'btn btn-outline-secondary' %>
+</div>
